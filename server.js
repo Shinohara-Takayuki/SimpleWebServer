@@ -34,6 +34,7 @@ http.createServer(function(request, response) {
                 },
         }
         headerStr['.topojson'] = headerStr['.geojson'] = headerStr['.csv'] =  headerStr['.json'];
+        headerStr['.csv']['Content-Type'] = 'text/csv;  charset=utf-8';
         var header = (headerStr[extname]) ? headerStr[extname] : null;
  
         response.writeHead(200, header);
