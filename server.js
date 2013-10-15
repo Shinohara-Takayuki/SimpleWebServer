@@ -8,12 +8,12 @@ var http = require("http"),
 http.createServer(function(request, response) {
 
 	var Response = {
-		200:function(file, filename){
+		"200":function(file, filename){
 			var extname = path.extname(filename);
 			var header = {
-				'Access-Control-Allow-Origin':'*',
-				'Pragma': 'no-cache',
-				'Cache-Control' : 'no-cache'	   
+				"Access-Control-Allow-Origin":"*",
+				"Pragma": "no-cache",
+				"Cache-Control" : "no-cache"	   
 			}
 
 			response.writeHead(200, header);
@@ -26,7 +26,7 @@ http.createServer(function(request, response) {
 			response.end();
 		
 		},
-		500:function(err){
+		"500":function(err){
 			response.writeHead(500, {"Content-Type": "text/plain"});
 			response.write(err + "\n");
 			response.end();
@@ -40,12 +40,12 @@ http.createServer(function(request, response) {
 
 	fs.exists(filename, function(exists){
 		console.log(filename+" "+exists);
-		if (!exists) { Response['404'](); return ; }
+		if (!exists) { Response["404"](); return ; }
 		if (fs.statSync(filename).isDirectory()) { filename += '/index.html'; }
 
 		fs.readFile(filename, "binary", function(err, file){
-		if (err) { Response[500](err); return ; }
-			Response[200](file, filename);   
+		if (err) { Response["500"](err); return ; }
+			Response["200"](file, filename);   
 		}); 
 
 	});
